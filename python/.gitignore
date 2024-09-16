@@ -1,0 +1,6 @@
+.venv/
+.DS_store
+pyproject.toml
+poetry.lock
+.direnv
+.env
