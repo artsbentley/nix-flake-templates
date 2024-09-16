@@ -29,23 +29,21 @@
       devShell = pkgs.mkShell {
         # buildInputs = with pkgs.python312Packages; [ python venvShellHook ];
         packages = with pkgs; [
-          python312Packages.python
-          python312Packages.venvShellHook
+		  python312Packages.python
+		  python312Packages.venvShellHook
           poetry
           pyright
           maturin
-          sops
-          age
+		  sops
+		  age
         ];
 
         venvDir = "./.venv";
-
         postVenvCreation = ''
           unset SOURCE_DATE_EPOCH
-          ${pkgs.poetry}/bin/poetry env use $(venvDir)/bin/python
-          ${pkgs.poetry}/bin/poetry install --no-root
+          ${pkgs.poetry}/bin/poetry env use .venv/bin/python
+          ${pkgs.poetry}/bin/poetry install
         '';
-
         postShellHook = ''
           unset SOURCE_DATE_EPOCH
           ${pkgs.poetry}/bin/poetry env info
